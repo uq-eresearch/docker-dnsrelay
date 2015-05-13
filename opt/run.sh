@@ -22,7 +22,6 @@ cat <<CONF >> /etc/bind/named.conf
   allow-transfer { none; };
 
   auth-nxdomain no;    # conform to RFC1035
-  listen-on-v6 { any; };
 };
 CONF
 
@@ -30,4 +29,4 @@ echo "### Starting with config:"
 cat /etc/bind/named.conf
 echo "###"
 
-exec /usr/sbin/named -g
+exec /usr/sbin/named -4 -g
