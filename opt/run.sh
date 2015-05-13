@@ -1,17 +1,19 @@
-#!/bin/bash
+#!/bin/sh
 
-cat <<CONF > /etc/bind/named.conf.options
+rm /etc/bind/*
+
+cat <<CONF > /etc/bind/named.conf
 options {
-  directory "/var/cache/bind";
+  directory "/var/bind";
   forwarders {
 CONF
 
 for i in $@
 do
-  echo "    $i;" >> /etc/bind/named.conf.options
+  echo "    $i;" >> /etc/bind/named.conf
 done
 
-cat <<CONF >> /etc/bind/named.conf.options
+cat <<CONF >> /etc/bind/named.conf
   };
 
   listen-on port 53 { any; };
@@ -24,6 +26,8 @@ cat <<CONF >> /etc/bind/named.conf.options
 };
 CONF
 
-cat /etc/bind/named.conf.options
+echo "### Starting with config:"
+cat /etc/bind/named.conf
+echo "###"
 
-exec /usr/sbin/named -f
+exec /usr/sbin/named -g

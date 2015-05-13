@@ -1,10 +1,7 @@
-FROM debian:8
+FROM alpine:3.1
 MAINTAINER Tim Dettrick <t.dettrick@uq.edu.au>
 
-ENV DEBIAN_FRONTEND=noninteractive
-
-RUN sed -i 's/httpredir.debian.org/mirror.aarnet.edu.au\/pub/' /etc/apt/sources.list && \
-  apt-get update && apt-get install -y --no-install-recommends bind9 && apt-get clean
+RUN apk add --update bind && rm -rf /var/cache/apk/*
 
 ADD /opt/run.sh /opt/run.sh
 
