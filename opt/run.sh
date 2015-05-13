@@ -23,6 +23,7 @@ cat <<CONF >> /etc/bind/named.conf
 
   auth-nxdomain no;    # conform to RFC1035
 };
+controls {}; # Disable RNDC
 CONF
 
 echo "### Starting with config:"
